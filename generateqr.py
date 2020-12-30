@@ -59,7 +59,7 @@ def makeqr(ProuductName,weight,AgentNumber,pincode,qualitymark,temp,qron,dateofs
 	
 	qr.make(fit=True)
 	img=qr.make_image(fill="black",back_color="white")
-	img.save(ProuductName+"qr.png")      #img 
+	img.save(ProuductName+"qr.png")      #i edit QR image name 
 	
 if __name__ == "__main__":
     error_list = []
