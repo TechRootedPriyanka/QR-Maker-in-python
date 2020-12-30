@@ -3,12 +3,12 @@ import xlrd
 import sys
 import os
 def makeqr(ProuductName,weight,AgentNumber,pincode,qualitymark,temp,qron,dateofshipping,boxsize,mobilenum):
-	qr=qrcode.QRCode(
+	qr=qrcode.QRCode(   # size of QR
 		version=1,
 		box_size=10,
 		border=5
 		)
-
+   # list off fields in QR
 	data= ProuductName #imput
 	qr.add_data("Product name: ")
 	qr.add_data(data)
@@ -60,6 +60,7 @@ def makeqr(ProuductName,weight,AgentNumber,pincode,qualitymark,temp,qron,dateofs
 	qr.make(fit=True)
 	img=qr.make_image(fill="black",back_color="white")
 	img.save(ProuductName+"qr.png")      #img 
+	
 if __name__ == "__main__":
     error_list = []
     error_count = 0
@@ -67,7 +68,7 @@ if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath((sys.argv[0]))))  #read later
 
     # Read data from an excel sheet from row 2
-    Book = xlrd.open_workbook('C:\\Users\\Priyanka Shahasane\\Desktop\\Harish2\\List.xlsx')
+    Book = xlrd.open_workbook('...\\List.xlsx')  # Change the path if needed 
     WorkSheet = Book.sheet_by_name('Sheet1')
     
     num_row = WorkSheet.nrows - 1
@@ -75,7 +76,7 @@ if __name__ == "__main__":
 
     while row < num_row:
         row += 1
-        
+        # taking data from sheet 
         ProuductName = WorkSheet.cell_value( row, 0 )
         
         weight = WorkSheet.cell_value( row, 1 )
@@ -98,10 +99,10 @@ if __name__ == "__main__":
 
         
        
-        # Make certificate and check if it was successful
+        # Make QR 
         filename = makeqr(ProuductName,weight,AgentNumber,pincode,qualitymark,temp,qron,dateofshipping,boxsize,mobilenum )
         
-        # Successfully made certificate
+        # Successfully fields in QR
         if filename != -1:
             #email_certi( filename, receiver )
             print ("Sent to " + ProuductName)
